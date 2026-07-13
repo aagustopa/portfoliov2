@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button";
 import { AnimatedBorderButton } from "@/components/AnimatedBorderButton";
-import { AlarmClock, Angry, ArrowRight, BadgeCheck, ChevronDown  } from "lucide-react";
+import { AlarmClock, Angry, ArrowRight, BadgeCheck, ChevronDown, Download } from "lucide-react";
 
 const skills = [
     "React",
@@ -77,7 +77,10 @@ export const Hero = () => {
                             <Button size="lg">
                                 Contact Me <ArrowRight className="w-5 h-5" />
                             </Button>
-                            <AnimatedBorderButton />
+                            <AnimatedBorderButton >
+                                <Download className="w-5 h-5" />
+                                Download CV
+                            </AnimatedBorderButton>
                         </div>
                         {/* social links */}
                         <div className="flex items-center gap-4 animate-fade-in animation-delay-400">
