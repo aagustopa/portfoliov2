@@ -1,0 +1,43 @@
+[{
+        "period": "2021-2025",
+        "role": "Frontend Engineer",
+        "company": "Vasava - Mango",
+        "description": "cositas",
+        "technologies": [
+            "React",
+            "Javascript",
+            "SASS",
+            "CMS",
+            "PHP"
+        ],
+        "current": false
+    },
+    {
+        "period": "2020-2021",
+        "role": "Full Stack Developer",
+        "company": "Sigma",
+        "description": "cositas",
+        "technologies": [
+            "Java",
+            "Javascript",
+            "Spring",
+            "CMS",
+            "PHP"
+        ],
+        "current": false
+    },
+    {
+        "period": "2015-2020",
+        "role": "Checking Agent",
+        "company": "BC Tours",
+        "description": "cositas",
+        "technologies": [
+            "React",
+            "Javascript",
+            "SASS",
+            "CMS",
+            "PHP"
+        ],
+        "current": false
+    }
+]

@@ -1,29 +1,5 @@
-const experiencies = [
-    {
-        period: "2021-2025",
-        role: "Frontend Engineer",
-        company: "Vasava - Mango",
-        description: "cositas",
-        technologies: ["React", "Javascript", "SASS", "CMS", "PHP"],
-        current: false,
-    },
-    {
-        period: "2020-2021",
-        role: "Full Stack Developer",
-        company: "Sigma",
-        description: "cositas",
-        technologies: ["Java", "Javascript", "Spring", "CMS", "PHP"],
-        current: false,
-    },
-    {
-        period: "2015-2020",
-        role: "Checking Agent",
-        company: "BC Tours",
-        description: "cositas",
-        technologies: ["React", "Javascript", "SASS", "CMS", "PHP"],
-        current: false,
-    },
-]
+import { ExperienceCard } from "@/components/ExperienceCard";
+import experiencies from "@/data/experiencies.json";
 
 export const Experience = () => {
     return (
@@ -44,6 +20,22 @@ export const Experience = () => {
                     <p className="text-muted-foreground animate-fade-in animation-delay-200">
                         A timeline of my professional growth, from curios begineer to senior engineer leading teams and building products at scale
                     </p>
+                </div>
+                {/* timeline */}
+                <div className="relative">
+                    <div className="timeline-glow absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary/70 via-primary/30 to-transparent md:-translate-x-1/2 shadow-[0_0_25px_rgba(32, 178, 166, 0.8)]" />
+                    {/* experience items */}
+                    <div className="space-y-12">
+
+                        {experiencies.map((exp, idx) => (
+                            <ExperienceCard
+                                key={idx}
+                                exp={exp}
+                                i={idx}
+                                style={{ animationDelay: `${(idx + 1) * 150}ms` }}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
