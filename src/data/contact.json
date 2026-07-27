@@ -1,0 +1,19 @@
+[{
+        "icon": "Mail",
+        "label": "Email",
+        "value": "alejandroagustopa@gmail.com",
+        "href": "mailto:alejandroagustopa@gmail.com"
+    },
+    {
+        "icon": "Phone",
+        "label": "Phone",
+        "value": "+34 603611987",
+        "href": "tel: +34603611987"
+    },
+    {
+        "icon": "MapPin",
+        "label": "Location",
+        "value": "Barcelona, ES",
+        "href": "#"
+    }
+]

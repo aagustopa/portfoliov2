@@ -1,3 +1,9 @@
 export const Contact = () => {
-    return <section></section>;
+    return (
+        <>
+            <section className="">
+
+            </section>
+        </>
+    );
 }
