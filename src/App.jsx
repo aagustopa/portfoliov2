@@ -20,7 +20,7 @@ function App() {
         <Testimonials />
         <Contact />
       </main>
-      <Footer/>
+      <Footer />
     </div>
   )
 }

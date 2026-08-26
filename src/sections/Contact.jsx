@@ -1,10 +1,14 @@
 import contact from "@/data/contact.json";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import { IoMdMail } from "react-icons/io";
+import { FaPhone } from "react-icons/fa6";
+import { RiMapPin2Fill } from "react-icons/ri";
 import { Button } from "@/components/Button";
 import { useState } from "react";
 import emailjs from "@emailjs/browser"
 
 export const Contact = () => {
+    const icons = { IoMdMail, FaPhone, RiMapPin2Fill };
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -15,8 +19,28 @@ export const Contact = () => {
         type: null, // 'success' or 'error'
         message: "",
     });
+    const [errors, setErrors] = useState({});
+    const validate = () => {
+        const newErrors = {};
+        if (!formData.name.trim() || formData.name.trim().length < 2) {
+            newErrors.name = "Name must be at least 2 characters";
+        }
+        if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = "Please enter a valid email";
+        }
+        if (!formData.message.trim() || formData.message.trim().split(/\s+/).length < 5) {
+            newErrors.message = "Message must be at least 5 words";
+        }
+        return newErrors;
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const newErrors = validate();
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+        setErrors({});
 
         setIsLoading(true);
         setSubmitStatus({ type: null, message: "" });
@@ -33,12 +57,12 @@ export const Contact = () => {
             await emailjs.send(serviceId, templateId, {
                 name: formData.name,
                 email: formData.email,
-                messsage: formData.message,
+                message: formData.message,
             }, publicKey);
 
             setSubmitStatus({
                 type: "success",
-                message: "Message sent succesfully! I'll get back to you soon.",
+                message: "Message sent successfully! I'll get back to you soon.",
             });
             setFormData({ name: "", email: "", message: "" });
         } catch (err) {
@@ -88,8 +112,16 @@ export const Contact = () => {
                                         required
                                         placeholder="Your name..."
                                         value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" />
+                                        onChange={(e) => {
+                                            setFormData({ ...formData, name: e.target.value });
+                                            if (errors.name) setErrors({ ...errors, name: "" })
+                                        }}
+                                        className={`w-full px-4 py-3 bg-surface rounded-xl border focus:ring-1 outline-none transition-all
+                                        ${errors.name
+                                                ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                                                : "border-border focus:border-primary focus:ring-primary"
+                                            }`} />
+                                    {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
                                 </div>
                                 <div>
                                     <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
@@ -98,8 +130,17 @@ export const Contact = () => {
                                         required
                                         placeholder="your@email.com"
                                         value={formData.email}
-                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" />
+                                        onChange={(e) => {
+                                            setFormData({ ...formData, email: e.target.value });
+                                            if (errors.email) setErrors({ ...errors, email: "" })
+                                        }}
+                                        // className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" />
+                                        className={`w-full px-4 py-3 bg-surface rounded-xl border focus:ring-1 outline-none transition-all
+                                        ${errors.email
+                                                ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                                                : "border-border focus:border-primary focus:ring-primary"
+                                            }`} />
+                                    {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
                                 </div>
                                 <div>
                                     <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
@@ -109,8 +150,16 @@ export const Contact = () => {
                                         required
                                         placeholder="Your message..."
                                         value={formData.message}
-                                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                        className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none" />
+                                        onChange={(e) => {
+                                            setFormData({ ...formData, message: e.target.value });
+                                            if (errors.message) setErrors({ ...errors, message: "" })
+                                        }}
+                                        className={`w-full px-4 py-3 bg-surface rounded-xl border focus:ring-1 outline-none transition-all resize-none
+                                        ${errors.message
+                                                ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                                                : "border-border focus:border-primary focus:ring-primary"
+                                            }`} />
+                                    {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
                                 </div>
                                 <Button className="w-full" type="submit" size="lg" disabled={isLoading}>
                                     {isLoading ? (
@@ -148,23 +197,26 @@ export const Contact = () => {
                                     Contact Information
                                 </h3>
                                 <div className="space-y-4">
-                                    {contact.map((item, i) => (
-                                        <a
-                                            key={i}
-                                            href={item.href}
-                                            className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface transition-colors group"
-                                        >
-                                            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                                                <item.icon className="w-5 h-5 text-primary" />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm text-muted-foreground">
-                                                    {item.label}
+                                    {contact.map((item) => {
+                                        const Icon = icons[item.icon];
+                                        return (
+                                            <a
+                                                key={item.label}
+                                                href={item.href}
+                                                className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface transition-colors group"
+                                            >
+                                                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                                    <Icon className="w-5 h-5 text-primary" />
                                                 </div>
-                                                <div className="font-medium">{item.value}</div>
-                                            </div>
-                                        </a>
-                                    ))}
+                                                <div>
+                                                    <div className="text-sm text-muted-foreground">
+                                                        {item.label}
+                                                    </div>
+                                                    <div className="font-medium">{item.value}</div>
+                                                </div>
+                                            </a>
+                                        )
+                                    })}
                                 </div>
                             </div>
 

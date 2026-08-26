@@ -1,19 +1,19 @@
 [{
-        "icon": "Mail",
+        "icon": "IoMdMail",
         "label": "Email",
         "value": "alejandroagustopa@gmail.com",
         "href": "mailto:alejandroagustopa@gmail.com"
     },
     {
-        "icon": "Phone",
+        "icon": "FaPhone",
         "label": "Phone",
         "value": "+34 603611987",
-        "href": "tel: +34603611987"
+        "href": "tel:+34603611987"
     },
     {
-        "icon": "MapPin",
+        "icon": "RiMapPin2Fill",
         "label": "Location",
         "value": "Barcelona, ES",
-        "href": "#"
+        "href": "https://maps.app.goo.gl/ZwUfnVo7bPyE91oB6"
     }
 ]

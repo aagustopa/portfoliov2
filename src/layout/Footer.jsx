@@ -1,9 +1,9 @@
-import { ActivityIcon } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const socialLinks = [
-    { icon: ActivityIcon, href: "#", label: "GitHub" },
-    { icon: ActivityIcon, href: "#", label: "LinkedIn" },
-    { icon: ActivityIcon, href: "#", label: "Twitter" },
+    { icon: FaGithub, href: "https://github.com/aagustopa", label: "GitHub" },
+    { icon: FaLinkedin, href: "https://www.linkedin.com/in/alejandroagustopa/", label: "LinkedIn" },
+    // { icon: FaTwitter, href: "#", label: "Twitter" },
 ];
 
 const footerLinks = [
@@ -14,7 +14,8 @@ const footerLinks = [
 ];
 
 export const Footer = () => {
-    const currentYear = new Date().getFullYear();
+    // const currentYear = new Date().getFullYear();
+    const currentYear = 2026;
 
     return (
         <footer className="py-12 border-t border-border">
@@ -51,6 +52,8 @@ export const Footer = () => {
                                 href={social.href}
                                 aria-label={social.label}
                                 className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all"
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 <social.icon className="w-5 h-5" />
                             </a>
